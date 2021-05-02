@@ -1,4 +1,4 @@
-# fake_spotify
+# spotify-clone
 
 A new Flutter project.
 
