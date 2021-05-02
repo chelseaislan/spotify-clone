@@ -13,7 +13,7 @@ class MyCollection extends StatelessWidget {
             avatar: CircleAvatar(
               backgroundImage: NetworkImage("https://cutt.ly/Kbzul63"),
             ),
-            headerText: "Koleksi kamu",
+            headerText: "Koleksi Kamu",
             iconData1: Icons.search_outlined,
             iconData2: Icons.add,
             onItemPressed1: () {},
