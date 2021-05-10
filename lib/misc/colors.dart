@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-var white = Colors.white;
-var grey2 = Colors.grey[50];
-var grey3 = Colors.grey[200];
-var primaryGrey = Colors.grey;
-var grey4 = Colors.grey;
-var grey5 = Colors.grey[900];
-var primaryBlack = Colors.black;
-var black2 = Colors.black54;
-var primaryPurple = Color(0xff530a6e);
+const kWhite = Colors.white;
+const kPrimaryBlack = Colors.black87;
+const kSecondBlack = Color(0xff202020);
+const kPrimaryGreen = Color(0xff1DB954);
+const kSecondGreen = Color(0xff1ED760);
+const kPrimaryGrey = Color(0xff535353);
+const kSecondGrey = Color(0xffB3B3B3);

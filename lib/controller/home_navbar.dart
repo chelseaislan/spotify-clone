@@ -1,7 +1,7 @@
 import 'package:fake_spotify/misc/colors.dart';
-import 'package:fake_spotify/navbar_pages/home_page.dart';
-import 'package:fake_spotify/navbar_pages/my_collection.dart';
-import 'package:fake_spotify/navbar_pages/search_page.dart';
+import 'package:fake_spotify/view/navbar_pages/home_page.dart';
+import 'package:fake_spotify/view/navbar_pages/my_library_page.dart';
+import 'package:fake_spotify/view/navbar_pages/search_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeNavBar extends StatefulWidget {
@@ -14,7 +14,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
   var widgetOptions = [
     HomePage(),
     SearchPage(),
-    MyCollection(),
+    MyLibrary(),
   ];
 
   void onItemTap(var index) {
@@ -28,7 +28,7 @@ class _HomeNavBarState extends State<HomeNavBar> {
     return Scaffold(
       body: widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: black2,
+        backgroundColor: kSecondBlack,
         type: BottomNavigationBarType.fixed,
         items: [
           bottomNavBarItem(Icons.home_outlined, "Beranda"),
@@ -37,8 +37,8 @@ class _HomeNavBarState extends State<HomeNavBar> {
         ],
         currentIndex: selectedIndex,
         onTap: onItemTap,
-        selectedItemColor: white,
-        unselectedItemColor: grey4,
+        selectedItemColor: kWhite,
+        unselectedItemColor: kSecondGrey,
         selectedLabelStyle: TextStyle(fontSize: 12),
         unselectedLabelStyle: TextStyle(fontSize: 12),
       ),
