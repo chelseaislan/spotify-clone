@@ -25,7 +25,7 @@ class SearchPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView(
                 children: [
-                  SearchTitleText(titleText: "Your top genres"),
+                  TitleText(titleText: "Your top genres"),
                   GetX<GenreControllerA>(
                     init: GenreControllerA(),
                     initState: (_) {},
@@ -35,9 +35,9 @@ class SearchPage extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 3,
-                          mainAxisSpacing: 3,
-                          mainAxisExtent: 90,
+                          crossAxisSpacing: 4,
+                          mainAxisSpacing: 8,
+                          mainAxisExtent: 100,
                         ),
                         itemCount: controller.genreTypes.length,
                         itemBuilder: (context, index) {
@@ -51,7 +51,7 @@ class SearchPage extends StatelessWidget {
                       );
                     },
                   ),
-                  SearchTitleText(titleText: "Browse all genres"),
+                  TitleText(titleText: "Browse all genres"),
                   GetX<GenreControllerB>(
                     init: GenreControllerB(),
                     initState: (_) {},
@@ -61,9 +61,9 @@ class SearchPage extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 2,
-                          mainAxisSpacing: 2,
-                          mainAxisExtent: 90,
+                          crossAxisSpacing: 4,
+                          mainAxisSpacing: 8,
+                          mainAxisExtent: 100,
                         ),
                         itemCount: controller.genreTypes.length,
                         itemBuilder: (context, index) {
@@ -89,6 +89,7 @@ class SearchPage extends StatelessWidget {
               iconData1Color: smpc.iconData1Color,
               iconData2: smpc.iconData2,
               onItemTap: smpc.onItemTap,
+              containerColor: kSecondBlack,
             ),
           ],
         ),
@@ -153,9 +154,9 @@ class AlbumContainer3 extends StatelessWidget {
   }
 }
 
-class SearchTitleText extends StatelessWidget {
+class TitleText extends StatelessWidget {
   final String titleText;
-  const SearchTitleText({
+  const TitleText({
     Key? key,
     required this.titleText,
   }) : super(key: key);

@@ -3,6 +3,7 @@ import 'package:fake_spotify/controller/small_album_controller.dart';
 import 'package:fake_spotify/controller/header_controller.dart';
 import 'package:fake_spotify/controller/small_player_controller.dart';
 import 'package:fake_spotify/misc/colors.dart';
+import 'package:fake_spotify/view/album_playlist/artist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,6 +66,8 @@ class HomePage extends StatelessWidget {
                                     controller.smallHeaderAlbum[index].imageURL,
                                 albumTitle: controller
                                     .smallHeaderAlbum[index].albumTitle,
+                                onItemTap: controller
+                                    .smallHeaderAlbum[index].onItemTap,
                               );
                             },
                           );
@@ -73,9 +76,11 @@ class HomePage extends StatelessWidget {
                     ),
                     AvatarHeader(
                       imageURL: "https://cutt.ly/Zbl3HV1",
-                      headerTitle: "Astrid S",
+                      headerTitle: "Astrid S 🚸",
                       headerDesc: "SIMILAR TO",
-                      onItemTap: () {},
+                      onItemTap: () {
+                        Get.to(() => ArtistPage());
+                      },
                     ),
                     SizedBox(
                       height: 200,
@@ -132,7 +137,9 @@ class HomePage extends StatelessWidget {
                       imageURL: "https://cutt.ly/rbOZVYX",
                       headerTitle: "Coldplay",
                       headerDesc: "SIMILAR TO",
-                      onItemTap: () {},
+                      onItemTap: () {
+                        Get.to(() => ArtistPage());
+                      },
                     ),
                     SizedBox(
                       height: 200,
@@ -172,6 +179,7 @@ class HomePage extends StatelessWidget {
               iconData1Color: smpc.iconData1Color,
               iconData2: smpc.iconData2,
               onItemTap: smpc.onItemTap,
+              containerColor: kSecondBlack,
             ),
           ],
         ),
@@ -186,19 +194,21 @@ class SmallPlayer extends StatelessWidget {
     required this.imageURL,
     required this.playerTrack,
     required this.playerArtist,
-    required this.iconData1,
-    required this.iconData1Color,
-    required this.iconData2,
+    this.iconData1,
+    this.iconData1Color,
+    this.iconData2,
     this.onItemTap,
+    required this.containerColor,
   }) : super(key: key);
 
   final String imageURL;
   final String playerTrack;
   final String playerArtist;
-  final IconData iconData1;
-  final Color iconData1Color;
-  final IconData iconData2;
+  final IconData? iconData1;
+  final Color? iconData1Color;
+  final IconData? iconData2;
   final Function()? onItemTap;
+  final Color containerColor;
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +220,7 @@ class SmallPlayer extends StatelessWidget {
         onTap: onItemTap,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          decoration: BoxDecoration(color: kSecondBlack),
+          decoration: BoxDecoration(color: containerColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

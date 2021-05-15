@@ -1,44 +1,21 @@
+import 'package:fake_spotify/controller/album_playlist/now_playing_controller.dart';
 import 'package:fake_spotify/controller/lyrics_controller.dart';
 import 'package:fake_spotify/misc/colors.dart';
+import 'package:fake_spotify/view/playback/lyrics.dart';
+import 'package:fake_spotify/view/playback/queue_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BigPlayer extends StatelessWidget {
+  final _nowPlayingController = NowPlayingController();
   @override
   Widget build(BuildContext context) {
+    var npc = _nowPlayingController.nowPlaying;
     return Scaffold(
       backgroundColor: kSecondBlack,
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: kSecondBlack,
-        leading: IconButton(
-            icon: Icon(
-              Icons.keyboard_arrow_down_outlined,
-              color: kWhite,
-            ),
-            onPressed: () {
-              Get.back();
-            }),
-        title: Column(
-          children: [
-            Text(
-              "PLAYING FROM PLAYLIST",
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-            Text(
-              "Top #2",
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert_outlined),
-            onPressed: () {},
-            color: kWhite,
-          ),
-        ],
+      appBar: PlayerAppBar(
+        queueType: "album".toUpperCase(),
+        queueFrom: "Leave It Beautiful",
       ),
       body: ListView(
         children: [
@@ -48,11 +25,11 @@ class BigPlayer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(bottom: 40, top: 20),
                   alignment: Alignment.center,
                   child: Image.network(
-                    "https://cutt.ly/SbO3Yeb",
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    npc.imageURL,
+                    width: MediaQuery.of(context).size.width * 1,
                   ),
                 ),
                 Row(
@@ -62,17 +39,19 @@ class BigPlayer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hurts So Good",
+                          npc.playerTrack,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
                               .copyWith(fontSize: 20),
                         ),
-                        Text("Astrid S",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(fontSize: 16, color: kSecondGrey)),
+                        Text(
+                          npc.playerArtist,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(fontSize: 16, color: kSecondGrey),
+                        ),
                       ],
                     ),
                     PlayerMainButtons(
@@ -100,80 +79,124 @@ class BigPlayer extends StatelessWidget {
                     ),
                   ],
                 ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      PlayerMainButtons(
+                        iconData: Icons.shuffle_outlined,
+                        size: 20,
+                        onItemPressed: () {},
+                        iconColor: kWhite,
+                      ),
+                      PlayerMainButtons(
+                        iconData: Icons.skip_previous_sharp,
+                        size: 40,
+                        onItemPressed: () {},
+                        iconColor: kWhite,
+                      ),
+                      PlayerMainButtons(
+                        iconData: Icons.play_circle_filled_outlined,
+                        size: 70,
+                        onItemPressed: () {},
+                        iconColor: kWhite,
+                      ),
+                      PlayerMainButtons(
+                        iconData: Icons.skip_next_sharp,
+                        size: 40,
+                        onItemPressed: () {},
+                        iconColor: kWhite,
+                      ),
+                      PlayerMainButtons(
+                        iconData: Icons.repeat_outlined,
+                        size: 20,
+                        onItemPressed: () {},
+                        iconColor: kWhite,
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    PlayerMainButtons(
-                      iconData: Icons.shuffle_outlined,
-                      size: 20,
-                      onItemPressed: () {},
-                      iconColor: kWhite,
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.laptop_outlined,
+                        color: kSecondGreen,
+                      ),
+                      label: Text(
+                        "ASUS-M413DA",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: kSecondGreen),
+                      ),
                     ),
-                    PlayerMainButtons(
-                      iconData: Icons.skip_previous_sharp,
-                      size: 40,
-                      onItemPressed: () {},
-                      iconColor: kWhite,
-                    ),
-                    PlayerMainButtons(
-                      iconData: Icons.play_circle_filled_outlined,
-                      size: 70,
-                      onItemPressed: () {},
-                      iconColor: kWhite,
-                    ),
-                    PlayerMainButtons(
-                      iconData: Icons.skip_next_sharp,
-                      size: 40,
-                      onItemPressed: () {},
-                      iconColor: kWhite,
-                    ),
-                    PlayerMainButtons(
-                      iconData: Icons.repeat_outlined,
-                      size: 20,
-                      onItemPressed: () {},
-                      iconColor: kWhite,
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.share_outlined,
+                            color: kSecondGrey,
+                          ),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.queue_music_outlined,
+                            color: kSecondGrey,
+                          ),
+                          onPressed: () {
+                            Get.to(() => QueueList());
+                          },
+                        ),
+                      ],
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
           // Lyrics
-          Container(
-            margin: EdgeInsets.fromLTRB(15, 30, 15, 30),
-            decoration: BoxDecoration(
-              color: Color(0xff3386d8),
-              borderRadius: BorderRadius.circular(20),
-            ),
+          InkWell(
+            onTap: () => Get.to(() => PlayerFullLyrics()),
             child: Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "LYRICS",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  SizedBox(height: 20),
-                  GetX<LyricsController>(
-                    init: LyricsController(),
-                    initState: (_) {},
-                    builder: (controller) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: controller.lyricsInfo.length,
-                        itemBuilder: (context, index) {
-                          return Text(
-                            controller.lyricsInfo[index].lyrics,
-                            style: Theme.of(context).textTheme.headline1,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  SizedBox(height: 10),
-                ],
+              margin: EdgeInsets.fromLTRB(15, 20, 15, 30),
+              decoration: BoxDecoration(
+                color: Color(0xff3386d8),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "LYRICS",
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    SizedBox(height: 10),
+                    GetX<LyricsController>(
+                      init: LyricsController(),
+                      initState: (_) {},
+                      builder: (controller) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.lyricsInfo.length,
+                          itemBuilder: (context, index) {
+                            return Text(
+                              controller.lyricsInfo[index].lyrics,
+                              style: Theme.of(context).textTheme.headline1,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           )
@@ -181,6 +204,61 @@ class BigPlayer extends StatelessWidget {
       ),
     );
   }
+}
+
+class PlayerAppBar extends StatelessWidget with PreferredSizeWidget {
+  const PlayerAppBar({
+    Key? key,
+    required this.queueType,
+    required this.queueFrom,
+  }) : super(key: key);
+
+  final String queueType;
+  final String queueFrom;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: kSecondBlack,
+      leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_down_outlined,
+            color: kWhite,
+          ),
+          onPressed: () {
+            Get.back();
+          }),
+      title: Column(
+        children: [
+          Text(
+            "PLAYING FROM $queueType",
+            style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                  fontSize: 12,
+                  letterSpacing: 0.5,
+                ),
+          ),
+          Text(
+            queueFrom,
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  letterSpacing: 0.5,
+                ),
+          ),
+        ],
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.more_vert_outlined),
+          onPressed: () {},
+          color: kWhite,
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
 class PlayerMainButtons extends StatelessWidget {

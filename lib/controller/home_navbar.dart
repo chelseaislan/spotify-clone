@@ -31,9 +31,9 @@ class _HomeNavBarState extends State<HomeNavBar> {
         backgroundColor: kSecondBlack,
         type: BottomNavigationBarType.fixed,
         items: [
-          bottomNavBarItem(Icons.home_outlined, "Beranda"),
-          bottomNavBarItem(Icons.search_outlined, "Cari"),
-          bottomNavBarItem(Icons.video_collection_outlined, "Koleksi Kamu"),
+          bottomNavBarItem(Icons.home_outlined, "Home"),
+          bottomNavBarItem(Icons.search_outlined, "Search"),
+          bottomNavBarItem(Icons.video_collection_outlined, "Your Library"),
         ],
         currentIndex: selectedIndex,
         onTap: onItemTap,

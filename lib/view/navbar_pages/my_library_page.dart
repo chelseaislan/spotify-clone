@@ -15,7 +15,7 @@ class MyLibrary extends StatelessWidget {
         preferredSize: Size.fromHeight(65),
         child: Column(
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: PrimaryHeader(
@@ -38,7 +38,7 @@ class MyLibrary extends StatelessWidget {
               child: ListView(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: EdgeInsets.only(bottom: 10, left: 5, right: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -92,6 +92,7 @@ class MyLibrary extends StatelessWidget {
               iconData1Color: smpc.iconData1Color,
               iconData2: smpc.iconData2,
               onItemTap: smpc.onItemTap,
+              containerColor: kSecondBlack,
             ),
           ],
         ),
@@ -121,12 +122,12 @@ class LibraryItems extends StatelessWidget {
     return InkWell(
       onTap: onItemTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.network(imageURL, width: 70),
-            SizedBox(width: 10),
+            SizedBox(width: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -135,7 +136,7 @@ class LibraryItems extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
-                      .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   "$libraryType • $libraryUser",
